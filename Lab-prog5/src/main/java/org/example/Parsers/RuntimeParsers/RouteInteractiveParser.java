@@ -1,7 +1,6 @@
 package org.example.Parsers.RuntimeParsers;
 
 import org.example.Managers.CollectionManager;
-import org.example.Managers.IdManager;
 import org.example.exemplars.Coordinates;
 import org.example.exemplars.LocationFrom;
 import org.example.exemplars.LocationTo;
@@ -9,6 +8,7 @@ import org.example.exemplars.Route;
 import java.time.ZonedDateTime;
 
 public class RouteInteractiveParser extends RuntimeParser<Route> {
+
     private final CollectionManager collectionManager;
     public RouteInteractiveParser(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;

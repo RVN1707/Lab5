@@ -1,7 +1,5 @@
 package org.example.Commands;
 
-import org.example.Managers.ScriptManager;
-
 import java.io.FileNotFoundException;
 
 public interface CommandInterface {

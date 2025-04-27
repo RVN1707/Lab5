@@ -1,7 +1,6 @@
 package org.example.Managers;
 
 import org.example.Commands.CommandInterface;
-
 import java.util.HashMap;
 
 public class CommandManager {
@@ -13,7 +12,7 @@ public class CommandManager {
     public HashMap<String, CommandInterface> getCommands() {
         return commands;
     }
-    public int executeCommand(String name, String[] args, ScriptManager scriptManager) {
+    public int executeCommand(String name, String[] args) {
         System.out.println(name);
         CommandInterface command = commands.get(name);
         if (command != null) {

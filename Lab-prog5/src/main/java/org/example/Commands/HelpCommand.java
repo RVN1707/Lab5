@@ -3,7 +3,7 @@ package org.example.Commands;
 import org.example.Managers.CommandManager;
 
 public class HelpCommand implements CommandInterface {
-    CommandManager manager;
+    private final CommandManager manager;
 
     public HelpCommand(CommandManager manager) {
         this.manager = manager;

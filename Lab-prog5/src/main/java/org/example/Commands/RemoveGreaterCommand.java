@@ -5,7 +5,7 @@ import org.example.Parsers.RuntimeParsers.RouteInteractiveParser;
 
 public class RemoveGreaterCommand implements CommandInterface{
 
-    CollectionManager manager;
+    private final CollectionManager manager;
 
     public RemoveGreaterCommand(CollectionManager manager) {
         this.manager = manager;

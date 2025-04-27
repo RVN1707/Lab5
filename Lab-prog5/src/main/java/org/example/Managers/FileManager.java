@@ -9,26 +9,20 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.example.Parsers.FileParsers.FileParserRoute;
-import org.example.exemplars.Coordinates;
-import org.example.exemplars.LocationFrom;
-import org.example.exemplars.LocationTo;
 import org.example.exemplars.Route;
-
 import java.util.Map;
 
 public class FileManager {
-    private String Pathfile;
-    private List<String[]> csvDataList;
-    private CollectionManager collectionManager;
+    private final String Pathfile;
+    private final CollectionManager collectionManager;
 
     public FileManager(String Pathfile, CollectionManager collectionManager) {
         this.Pathfile = System.getenv(Pathfile);
-        this.csvDataList = new ArrayList<>();
+        List<String[]> csvDataList = new ArrayList<>();
         this.collectionManager=collectionManager;
     }
 
     public void readCSVFile() {
-        int notValidExemplairsCounter = 0;
         ValidationManager validator = new ValidationManager();
         try (Reader reader = new FileReader(Pathfile.trim());
              CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';').withFirstRecordAsHeader().withTrim())) {
@@ -41,12 +35,9 @@ public class FileManager {
                     Route route = routeParser.parse();
                     if (validator.isValidRoute(route, collectionManager)){
                         collectionManager.add(route);
-                    }else {
-                        notValidExemplairsCounter++;
                     }
                 }catch (NullPointerException | NumberFormatException e) {}
             }
-            System.out.println("В файле найдено " + notValidExemplairsCounter + " невалидных элементов");
         } catch (FileNotFoundException e){
             System.err.println("Файл не найден");
         } catch (Exception e) {
@@ -54,11 +45,10 @@ public class FileManager {
             System.err.println("Ошибка при чтении файла: " + Pathfile);
         }
     }
-    public void saveCollectionToCsv() throws IOException {
-        // Получаем коллекцию маршрутов
+    public void saveCollectionToCsv(){
+
         Collection<Route> routes = collectionManager.getCollection();
 
-        // Определяем заголовки CSV-файла
         String[] headers = {"id", "name", "coords_x", "coords_y", "cr_date", "loc_from_x", "loc_from_y", "loc_from_z", "loc_to_x", "loc_to_y", "loc_to_z", "distance"};
 
         try (FileWriter fileWriter = new FileWriter(Pathfile);
@@ -67,9 +57,8 @@ public class FileManager {
                              .withHeader(headers)
                              .withDelimiter(';'))) {
 
-            // Записываем данные каждого маршрута
             for (Route route : routes) {
-                // Обработка координат
+
                 Double coordX = null;
                 Float coordY = null;
                 if (route.getCoordinates() != null) {
@@ -77,7 +66,6 @@ public class FileManager {
                     coordY = route.getCoordinates().getY();
                 }
 
-                // Обработка LocationFrom
                 Integer fromX = null;
                 Double fromY = null;
                 Float fromZ = null;
@@ -87,7 +75,6 @@ public class FileManager {
                     fromZ = route.getFrom().getZ();
                 }
 
-                // Обработка LocationTo
                 Long toX = null;
                 Long toY = null;
                 Float toZ = null;
@@ -113,14 +100,12 @@ public class FileManager {
                 );
             }
 
-
             System.out.println("Коллекция успешно сохранена в CSV: " +
                     Paths.get(Pathfile).toAbsolutePath());
 
         } catch (IOException e) {
             System.err.println("Ошибка сохранения в CSV: " + e.getMessage());
             e.printStackTrace();
-            throw e; // Пробрасываем исключение дальше, как указано в сигнатуре метода
         }
     }
 }

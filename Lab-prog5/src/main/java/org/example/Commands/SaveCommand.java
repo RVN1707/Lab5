@@ -3,7 +3,8 @@ package org.example.Commands;
 import org.example.Managers.FileManager;
 
 public class SaveCommand implements CommandInterface {
-    FileManager fileManager;
+
+    private final FileManager fileManager;
 
 
     public SaveCommand(FileManager fileManager) {

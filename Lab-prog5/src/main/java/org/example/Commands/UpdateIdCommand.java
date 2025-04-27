@@ -1,12 +1,11 @@
 package org.example.Commands;
 
 import org.example.Managers.CollectionManager;
-import org.example.Managers.ScriptManager;
 import org.example.Parsers.RuntimeParsers.RouteInteractiveParser;
 
 public class UpdateIdCommand implements CommandInterface {
 
-    CollectionManager manager;
+    private final CollectionManager manager;
 
     public UpdateIdCommand(CollectionManager manager) {
         this.manager = manager;

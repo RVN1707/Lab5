@@ -19,7 +19,7 @@ public RuntimeManager(CommandManager commandManager, FileManager fileManager){
             try {
                 System.out.print(">>> ");
                 String[] userCommand = scanner.nextLine().trim().split(" ");
-                commandManager.executeCommand(userCommand[0].toLowerCase(), Arrays.copyOfRange(userCommand, 1, userCommand.length), null);
+                commandManager.executeCommand(userCommand[0].toLowerCase(), Arrays.copyOfRange(userCommand, 1, userCommand.length));
             } catch (NoSuchElementException e) {
                 System.out.println("\n[Ввод завершён пользователем (CTRL+D). Выход из программы.]");
                 break;

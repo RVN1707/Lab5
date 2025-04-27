@@ -4,11 +4,12 @@ import org.example.exemplars.Route;
 import java.util.*;
 
 public class CollectionManager {
+
+    private final IdManager idManager;
     public CollectionManager() {
         this.idManager = new IdManager(this);
     }
 
-    private final IdManager idManager;
     public IdManager getIdManager() {
         return idManager;
     }

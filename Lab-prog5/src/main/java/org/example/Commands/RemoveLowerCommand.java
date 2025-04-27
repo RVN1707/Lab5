@@ -4,7 +4,8 @@ import org.example.Managers.CollectionManager;
 import org.example.Parsers.RuntimeParsers.RouteInteractiveParser;
 
 public class RemoveLowerCommand implements CommandInterface {
-    CollectionManager manager;
+
+    private final CollectionManager manager;
 
     public RemoveLowerCommand(CollectionManager manager) {
         this.manager = manager;

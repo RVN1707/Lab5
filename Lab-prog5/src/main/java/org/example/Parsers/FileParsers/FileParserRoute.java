@@ -9,10 +9,12 @@ import org.example.exemplars.Route;
 import java.time.ZonedDateTime;
 
 public class FileParserRoute extends FileParser  implements ParserInterface<Route> {
+
     FileParserCoordinates coordinatesParser;
     FileParserLocationFrom locationFromParser;
     FileParserLocationTo locationToParser;
     MapUtil mapUtil;
+
     public FileParserRoute(){
         this.coordinatesParser= new FileParserCoordinates();
         this.locationFromParser= new FileParserLocationFrom();

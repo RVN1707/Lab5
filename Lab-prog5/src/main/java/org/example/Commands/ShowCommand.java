@@ -3,7 +3,8 @@ package org.example.Commands;
 import org.example.Managers.CollectionManager;
 
 public class ShowCommand implements CommandInterface {
-    CollectionManager manager;
+
+    private final CollectionManager manager;
 
     public ShowCommand(CollectionManager manager) {
         this.manager = manager;

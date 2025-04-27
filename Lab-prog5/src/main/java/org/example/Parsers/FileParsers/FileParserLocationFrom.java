@@ -7,7 +7,7 @@ public class FileParserLocationFrom extends FileParser implements ParserInterfac
     @Override
     public LocationFrom parse() {
 
-        if (map.get("x") == "" && map.get("y") == "" && map.get("z")== "") {
+        if (map.get("x") == "" && map.get("y") == "" && map.get("z") == "") {
             return null;
         }else {
             Integer x = Integer.parseInt(map.get("x"));

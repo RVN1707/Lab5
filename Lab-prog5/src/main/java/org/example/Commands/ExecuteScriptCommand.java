@@ -1,8 +1,6 @@
 package org.example.Commands;
 
 import org.example.Managers.CommandManager;
-import org.example.Managers.ScriptManager;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ExecuteScriptCommand implements CommandInterface {
+
     private final CommandManager commandManager;
     private final Set<Path> executingScripts = new HashSet<>();
 
@@ -28,7 +27,6 @@ public class ExecuteScriptCommand implements CommandInterface {
         }
         String fullPath = String.join(" ", args);
 
-        // Удаляем кавычки в начале и конце, если они есть
         if (fullPath.startsWith("\"") && fullPath.endsWith("\"")) {
             fullPath = fullPath.substring(1, fullPath.length() - 1);
         }
@@ -36,7 +34,6 @@ public class ExecuteScriptCommand implements CommandInterface {
             Path scriptPath = Paths.get(fullPath).toAbsolutePath().normalize();
             File scriptFile = scriptPath.toFile();
 
-            // Проверка рекурсии
             synchronized (executingScripts) {
                 if (executingScripts.contains(scriptPath)) {
                     System.err.println("Ошибка: рекурсивный вызов скрипта " + scriptPath);
@@ -46,7 +43,6 @@ public class ExecuteScriptCommand implements CommandInterface {
             }
 
             try (BufferedReader reader = new BufferedReader(new FileReader(scriptFile))) {
-                ScriptManager scriptManager = new ScriptManager(reader);
 
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -59,7 +55,7 @@ public class ExecuteScriptCommand implements CommandInterface {
                         String[] commandArgs = parts.length > 1 ?
                                 parts[1].split("\\s+") : new String[0];
 
-                        commandManager.executeCommand(commandName, commandArgs, scriptManager);
+                        commandManager.executeCommand(commandName, commandArgs);
                     } catch (Exception e) {
                         System.err.println("Ошибка выполнения команды: " + e.getMessage());
                     }
@@ -69,12 +65,10 @@ public class ExecuteScriptCommand implements CommandInterface {
                     executingScripts.remove(scriptPath);
                 }
             }
-
         } catch (IOException e) {
             System.err.println("Ошибка работы со скриптом: " + e.getMessage());
             return 1;
         }
-
         return 0;
     }
 

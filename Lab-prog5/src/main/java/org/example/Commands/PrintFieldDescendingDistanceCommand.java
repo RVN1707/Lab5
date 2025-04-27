@@ -4,7 +4,7 @@ import org.example.Managers.CollectionManager;
 
 public class PrintFieldDescendingDistanceCommand implements CommandInterface{
 
-    CollectionManager manager;
+    private final CollectionManager manager;
 
     public PrintFieldDescendingDistanceCommand(CollectionManager manager) {
         this.manager = manager;

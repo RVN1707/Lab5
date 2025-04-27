@@ -4,7 +4,7 @@ import org.example.Managers.CollectionManager;
 
 public class InfoCommand implements CommandInterface {
 
-    CollectionManager manager;
+    private final CollectionManager manager;
 
     public InfoCommand(CollectionManager manager) {
         this.manager = manager;

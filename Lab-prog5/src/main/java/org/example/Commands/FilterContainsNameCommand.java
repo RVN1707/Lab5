@@ -3,7 +3,8 @@ package org.example.Commands;
 import org.example.Managers.CollectionManager;
 
 public class FilterContainsNameCommand implements CommandInterface {
-    CollectionManager manager;
+
+    private final CollectionManager manager;
 
     public FilterContainsNameCommand(CollectionManager manager) {
         this.manager = manager;
